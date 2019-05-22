@@ -1,2 +1,2 @@
 #!/bin/sh
-gcc *.c -o exe
+gcc src/*.c -o exe
