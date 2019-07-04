@@ -83,7 +83,7 @@ static void advance() {
 	}
 }
 
-static void consume(TokenType, type, const char* message) {
+static void consume(TokenType type, const char* message) {
 	if (parser.current.type == type) {
 		advance();
 		return;
@@ -125,6 +125,7 @@ static void endCompiler() {
 	if (!parser.hadError) {
 		disassembleChunk(currentChunk(), "code");
 	}
+#endif
 }
 
 static void expression();
@@ -242,7 +243,7 @@ void expression() {
 	parsePrecedence(PREC_ASSIGNMENT);
 }
 
-void compile(const char* source, Chunk* chunk) {
+bool compile(const char* source, Chunk* chunk) {
 	initScanner(source);
 
 	compilingChunk = chunk;

@@ -75,7 +75,7 @@ static InterpretResult run() {
 #undef BINARY_OP
 }
 
-InterpretResult interpret(Chunk* chunk) {
+InterpretResult interpret(const char* source) {
 	Chunk chunk;
 	initChunk(&chunk);
 

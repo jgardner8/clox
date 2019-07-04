@@ -23,7 +23,7 @@ static void repl() {
 
 static char* readFile(const char* path) {
 	FILE* file = fopen(path, "rb");
-	if (FILE == NULL) {
+	if (file == NULL) {
 		fprintf(stderr, "Could not open file \"%s\".\n", path);
 		exit(74);
 	}
@@ -65,14 +65,13 @@ int main(int argc, const char* argv[]) {
 	if (argc == 1) {
 		repl();
 	} else if (argc == 2) {
-		runFile(argv[1])
+		runFile(argv[1]);
 	} else {
 		fprintf(stderr, "Usage: clox [path]\n");
 		exit(64);
 	}
 
 	freeVM();
-	freeChunk(&chunk);
 
 	return 0;
 }
