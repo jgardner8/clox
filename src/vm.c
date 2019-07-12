@@ -92,7 +92,7 @@ static InterpretResult run() {
 			case OP_EQUAL: {
 				Value b = pop();
 				Value a = pop();
-				push(BOOL_VAL(values_equal(a, b)))
+				push(BOOL_VAL(valuesEqual(a, b)));
 				break;
 			}
 
@@ -103,7 +103,7 @@ static InterpretResult run() {
 			case OP_MULTIPLY: BINARY_OP(NUMBER_VAL, *); break;
 			case OP_DIVIDE:   BINARY_OP(NUMBER_VAL, /); break;
 			case OP_NOT:
-				push(BOOL_VAL(isFalsey(pop())))
+				push(BOOL_VAL(isFalsey(pop())));
 				break;
 			case OP_NEGATE:
 				if (!IS_NUMBER(peek(0))) {
@@ -111,7 +111,7 @@ static InterpretResult run() {
 					return INTERPRET_RUNTIME_ERROR;
 				}
 
-				push(NUMBER_VAL(-AS_NUMBER(pop())))
+				push(NUMBER_VAL(-AS_NUMBER(pop())));
 				break;
 			case OP_RETURN: {
 				printValue(pop());

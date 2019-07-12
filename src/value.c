@@ -33,7 +33,7 @@ void printValue(Value value) {
 	}
 }
 
-void valuesEqual(Value a, Value b) {
+bool valuesEqual(Value a, Value b) {
 	if (a.type != b.type) return false;
 
 	switch (a.type) {
