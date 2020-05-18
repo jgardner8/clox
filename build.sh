@@ -1,2 +1,2 @@
 #!/bin/sh
-gcc src/*.c -o exe
+gcc src/*.c -Wall -o exe
