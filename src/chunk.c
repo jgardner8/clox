@@ -26,6 +26,11 @@ void writeChunk(Chunk* chunk, uint8_t byte, int line) {
 }
 
 int addConstant(Chunk* chunk, Value value) {
+	int existingIndex = findValueArray(&chunk->constants, value);
+	if (existingIndex != -1) {
+		return existingIndex;
+	}
+
 	writeValueArray(&chunk->constants, value);
 	return chunk->constants.count - 1; // the index the constant was appended to
 }
