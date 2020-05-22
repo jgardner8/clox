@@ -56,6 +56,8 @@ struct sObjString {
 typedef struct sUpValue {
 	Obj obj;
 	Value* location;
+	Value closed;
+	struct sUpvalue* next;
 } ObjUpvalue;
 
 typedef struct {
