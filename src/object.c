@@ -94,6 +94,7 @@ void printObject(Value value) {
 	switch (OBJ_TYPE(value)) {
 		case OBJ_FUNCTION:
 			printFunction(AS_FUNCTION(value));
+			break;
 		case OBJ_NATIVE:
 			printf("<native fn>");
 			break;
