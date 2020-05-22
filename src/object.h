@@ -53,12 +53,13 @@ struct sObjString {
 	uint32_t hash;
 };
 
-typedef struct sUpValue {
+typedef struct sUpValue ObjUpvalue;
+struct sUpValue {
 	Obj obj;
 	Value* location;
 	Value closed;
-	struct sUpvalue* next;
-} ObjUpvalue;
+	ObjUpvalue* next;
+};
 
 typedef struct {
 	Obj obj;
