@@ -2,5 +2,30 @@
   "cSpell.words": [
     "clox",
     "klass"
-  ]
+  ],
+  "files.associations": {
+    "*.tcc": "c",
+    "chrono": "c",
+    "compare": "c",
+    "list": "c",
+    "exception": "c",
+    "functional": "c",
+    "algorithm": "c",
+    "random": "c",
+    "fstream": "c",
+    "istream": "c",
+    "mutex": "c",
+    "new": "c",
+    "numeric": "c",
+    "ostream": "c",
+    "sstream": "c",
+    "streambuf": "c",
+    "string_view": "c",
+    "cmath": "c",
+    "type_traits": "c",
+    "typeinfo": "c",
+    "utility": "c",
+    "valarray": "c",
+    "variant": "c"
+  }
 }
