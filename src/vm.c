@@ -16,6 +16,19 @@ static Value clockNative(int argCount, Value* args) {
 	return NUMBER_VAL((double)clock() / CLOCKS_PER_SEC);
 }
 
+static Value isDefinedNative(int argCount, Value* args) {
+	if (argCount != 2 || !IS_INSTANCE(args[0]) || !IS_STRING(args[1])) {
+		return BOOL_VAL(false);
+	}
+
+	ObjInstance* instance = AS_INSTANCE(args[0]);
+	ObjString* property = AS_STRING(args[1]);
+	Value _value;
+
+	bool result = tableGet(&instance->fields, property, &_value);
+	return BOOL_VAL(result);
+}
+
 static void resetStack() {
 	vm.stackTop = vm.stack;
 	vm.frameCount = 0;
@@ -75,6 +88,7 @@ void initVM() {
 	initTable(&vm.strings);
 
 	defineNative("clock", clockNative);
+	defineNative("isDefined", isDefinedNative);
 }
 
 void freeVM() {
