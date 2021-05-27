@@ -1,0 +1,136 @@
+class Robot {
+  init(x, y, orientation) {
+    this.x = x;
+    this.y = y;
+    this.orientation = orientation;
+  }
+
+  move(board) {
+    if (this.orientation == "NORTH") {
+      if (this.y > 0) {
+        this.y = this.y - 1;
+      }
+    } else if (this.orientation == "WEST") {
+      if (this.x > 0) {
+        this.x = this.x - 1;
+      }
+    } else if (this.orientation == "SOUTH") {
+      if (this.y < board.height - 1) {
+        this.y = this.y + 1;
+      }
+    } else if (this.orientation == "EAST") {
+      if (this.x < board.width - 1) {
+        this.x = this.x + 1;
+      }
+    }
+  }
+
+  left() {
+    if (this.orientation == "NORTH") {
+      this.orientation = "WEST";
+    } else if (this.orientation == "WEST") {
+      this.orientation = "SOUTH";
+    } else if (this.orientation == "SOUTH") {
+      this.orientation = "EAST";
+    } else if (this.orientation == "EAST") {
+      this.orientation = "NORTH";
+    }
+  }
+
+  right() {
+    this.left();
+    this.left();
+    this.left();
+  }
+
+  report() {
+    print "X=" + intToStr(this.x) + ", Y=" + intToStr(this.y) + ", ORIENTATION=" + this.orientation;
+  }
+}
+
+class Board {
+  init(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  validateX(x) {
+    return x >= 0 and x < this.width;
+  }
+
+  validateY(y) {
+    return y >= 0 and y < this.height;
+  }
+
+  validateOrientation(orientation) {
+    return orientation == "NORTH"
+        or orientation == "WEST"
+        or orientation == "EAST"
+        or orientation == "SOUTH";
+  }
+}
+
+fun readBoardState() {
+  fun readPositiveInt() {
+    var int;
+    while ((int = readInt()) < 0) {
+      print "Must be greater than zero.";
+    }
+    return int;
+  }
+
+  print "Enter board width (int):";
+  var width = readPositiveInt();
+
+  print "Enter board height (int):";
+  var height = readPositiveInt();
+
+  return Board(width, height);
+}
+
+fun readRobotState(board) {
+  fun readValidInput(readFun, validateFun) {
+    var input;
+    while (!validateFun(input = readFun())) {
+      print "Invalid input.";
+    }
+    return input;
+  }
+
+  print "Enter X coordinate (0-" + intToStr(board.width - 1) + "):";
+  var x = readValidInput(readInt, board.validateX);
+
+  print "Enter Y coordinate: (0-" + intToStr(board.height - 1) + "):";
+  var y = readValidInput(readInt, board.validateY);
+
+  print "Enter orientation (NORTH, SOUTH, EAST, WEST):";
+  var orientation = readValidInput(readStr, board.validateOrientation);
+
+  return Robot(x, y, orientation);
+}
+
+fun main() {
+  var board = readBoardState();
+
+  var robot;
+  var command;
+
+  while (command != "QUIT") {
+    print "Command (PLACE, MOVE, LEFT, RIGHT, REPORT, QUIT):";
+    command = readStr();
+
+    if (command == "PLACE") {
+      robot = readRobotState(board);
+    } else if (command == "MOVE") {
+      robot.move(board);
+    } else if (command == "LEFT") {
+      robot.left();
+    } else if (command == "RIGHT") {
+      robot.right();
+    } else if (command == "REPORT") {
+      robot.report();
+    }
+  }
+}
+
+main();

@@ -1,0 +1,19 @@
+class A {
+  init() {
+    this.prompt = "Hello World";
+  }
+
+  sayHello() {
+    print this.prompt;
+  }
+}
+
+class B < A {
+  sayHello() {
+    print "Time to say,";
+    super.sayHello();
+  }
+}
+
+var b = B();
+b.sayHello();
