@@ -29,10 +29,29 @@ static Value isDefinedNative(int argCount, Value* args) {
 	return BOOL_VAL(result);
 }
 
-static Value readNative(int argCount, Value* args) {
+static Value readStrNative(int argCount, Value* args) {
 	char str[100];
 	scanf("%99s", str);
-	return OBJ_VAL(copyString(str, 100));
+	return OBJ_VAL(copyString(str, strlen(str)));
+}
+
+static Value readIntNative(int argCount, Value* args) {
+	int i;
+	while (scanf("%d", &i) != 1) {
+		scanf("%*[^\n]"); // flush buffer
+	}
+	return NUMBER_VAL(i);
+}
+
+static Value intToStrNative(int argCount, Value* args) {
+	if (argCount != 1 || !IS_NUMBER(args[0])) {
+		return BOOL_VAL(false);
+	}
+
+	char buffer[80];
+	sprintf(buffer, "%d", (int)AS_NUMBER(args[0]));
+
+	return OBJ_VAL(copyString(buffer, strlen(buffer)));
 }
 
 static void resetStack() {
@@ -98,7 +117,9 @@ void initVM() {
 
 	defineNative("clock", clockNative);
 	defineNative("isDefined", isDefinedNative);
-	defineNative("read", readNative);
+	defineNative("readStr", readStrNative);
+	defineNative("readInt", readIntNative);
+	defineNative("intToStr", intToStrNative);
 }
 
 void freeVM() {
