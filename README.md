@@ -17,3 +17,6 @@ Requires `gcc`.
 ```
 ./clox programs/toyrobot.lox
 ```
+
+### Fun
+Try uncommenting various `#define DEBUG_*` lines from `common.h` to see more detail about compilation or execution.
