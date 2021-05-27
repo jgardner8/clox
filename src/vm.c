@@ -29,6 +29,12 @@ static Value isDefinedNative(int argCount, Value* args) {
 	return BOOL_VAL(result);
 }
 
+static Value readNative(int argCount, Value* args) {
+	char str[100];
+	scanf("%99s", str);
+	return OBJ_VAL(copyString(str, 100));
+}
+
 static void resetStack() {
 	vm.stackTop = vm.stack;
 	vm.frameCount = 0;
@@ -92,6 +98,7 @@ void initVM() {
 
 	defineNative("clock", clockNative);
 	defineNative("isDefined", isDefinedNative);
+	defineNative("read", readNative);
 }
 
 void freeVM() {
