@@ -1,3 +1,2 @@
 #!/bin/sh
-gcc src/*.c -Wall -o exe
-# TODO: -O3
+gcc src/*.c -Wall -O3 -o clox
