@@ -19,6 +19,7 @@ typedef enum {
 	OP_SET_UPVALUE,
 	OP_GET_PROPERTY,
 	OP_SET_PROPERTY,
+	OP_GET_SUPER,
 	OP_EQUAL,
 	OP_GREATER,
 	OP_LESS,
@@ -34,6 +35,7 @@ typedef enum {
 	OP_LOOP,
 	OP_CALL,
 	OP_INVOKE, // combination of OP_GET_PROPERTY and OP_CALL to optimise method calls
+	OP_SUPER_INVOKE, // combination of OP_GET_SUPER and OP_CALL to optimise super method calls
 	OP_CLOSURE,
 	OP_CLOSE_UPVALUE,
 	OP_RETURN,
